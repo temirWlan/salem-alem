@@ -1,0 +1,46 @@
+.burger {
+	display: inline-block;
+	width: 36px;
+	height: 3px;
+	background-color: #000;
+	position: relative;
+	cursor: pointer;
+	transition: all 0.7s ease 0s;
+}
+
+.burger:before, .burger:after {
+	content: '';
+	display: inline-block;
+	width: 36px;
+	height: 3px;
+	background-color: #000;
+	position: absolute;
+	transition: all 0.7s ease 0s;
+}
+
+.burger:before {
+	transform: translateY(-6px);
+}
+
+.burger:after {
+	transform: translateY(6px);
+}
+
+
+/* active */
+.active.burger {
+	transform: rotate(45deg);
+}
+
+.active.burger:before {
+	opacity: 0;
+}
+
+
+/*.active:before {
+	transform: rotate(45deg);
+}*/
+
+.active:after {
+	transform: rotate(-90deg);
+}
