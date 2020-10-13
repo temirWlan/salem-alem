@@ -1,4 +1,4 @@
-import { LOADIING_POSTS, ADD_POST, ERROR_POSTS_LOADING } from '../actions';
+import { POSTS_REQUESTED, POSTS_LOADED, POSTS_REJECTED, ADD_POST } from '../actions';
 
 const initialState = {
 	posts: [],
@@ -8,24 +8,38 @@ const initialState = {
 
 export default function postReducer(state = initialState, action) {
 	switch(action.type) {
-		case LOADIING_POSTS:
+		case POSTS_REQUESTED:
 			return {
 				...state,
-				loading: true
+				loading: true,
+				error: false
 			};
-			break;
+		case POSTS_LOADED: 
+			return {
+				...state,
+				posts: [...action.payload],
+				loading: false,
+				error: false
+			}
+		
+		case POSTS_REJECTED:
+			return {
+				...state,
+				loading: false,
+				error: true
+			};
 		case ADD_POST:
 			return {
 				...state,
-				posts: action.payload
+				posts: [action.payload, ...state.posts],
+				loading: false,
+				error: false
 			};
-			break;
-		case ERROR_POSTS_LOADING:
-			return {
-				...state,
-				error: true
-			};
-			break;
+		// case POST_LIKED:
+		// 	state.posts.forEach(post => {
+		// 		console.dir(post);
+		// 	});
+			
 		default: 
 			return state;
 	}

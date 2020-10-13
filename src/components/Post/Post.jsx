@@ -1,47 +1,74 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 import { Row, Column, AvatarBG } from '../Profile/Profile';
 import { Block } from '../PostAddBlock/PostAddBlock';
+import { connect } from 'react-redux';
 
-import like from '../../images/post-status-icons/heart.svg';
+import regularLike from '../../images/post-status-icons/regular-like.svg';
+import solidLike from '../../images/post-status-icons/solid-like.svg';
 import comment from '../../images/post-status-icons/speech-bubble.svg';
 
 
 
-const Post = () => {
+const Post = ({ avatar, fullname, date, time, preview, description, id }) => {
+	const [likeState, updateLikeState] = useState({
+		liked: false
+	});
+
+	const like = React.createRef();
+
+	const onLikedPost = e => {
+		e.preventDefault();
+		updateLikeState({ liked: !likeState.liked })
+		like.current.src = `${likeState.liked ? solidLike : regularLike}`;
+	};
 
 	return (
-		<div>post</div>
-		/*<PostBlock key={Math.random()}>
+		<PostBlock key={Math.random()}>
 			<Row style={{marginLeft: '13px'}}>
 				<AvatarBG>
-					<img src={avatarSrc} alt="avatar" />
+					{
+						avatar ? <img src={avatar} alt="avatar" /> : null
+					}
 				</AvatarBG>
 				<Col>
 					<Link 
 						style={{textDecoration: 'none'}}
-						to={fullname.replace(' ', '-').toLowerCase()}
+						to={
+								fullname ? fullname.replace(' ', '-').toLowerCase() : '/'
+							}
 					>
 						<Title>
-							{fullname}
+							{
+								fullname ? fullname : 'no name'
+							}
 						</Title>
 					</Link>
 					<PostDateDescription>
-						Published {date}
+						Published {date ? date : '00.00.00'} at {time ? time : '00:00:00'}
 					</PostDateDescription>
 				</Col>
 			</Row>
 			<Row style={{marginTop: '22px'}}>
 				<PreviewBG>
-					<img src={previewSrc} alt="preview" />
+					{
+						preview ? <img src={preview} alt="preview" /> : null
+					}
 				</PreviewBG>
 			</Row>
 			<Panel>
-				<PanelItem href="#">
-					<img src={like} alt="like" />
+				<PanelItem 
+					href="#" 
+					onClick={onLikedPost}
+				>
+					<img 
+						src={regularLike} 
+						alt="like"
+						ref={like}
+					/>
 				</PanelItem>
 				<PanelItem href="#">
 					<img src={comment} alt="comment" />
@@ -49,15 +76,20 @@ const Post = () => {
 			</Panel>
 			<Row style={{marginTop: '19px'}}>
 				<Text>
-					{text}
+					{
+						description ? description : 'post text'
+					}
 				</Text>
 			</Row>
-		</PostBlock>*/
+		</PostBlock>
 	);
 }
 
 
 const PostBlock = styled(Block)`
+	max-width: 550px;
+	width: 100%;
+	margin: 0 auto;
 	padding: 27px 25px 19px 25px;
 
 	&:not(:first-child) {
@@ -104,5 +136,7 @@ const PanelItem = styled.a`
 	max-width: 18px;
 	max-height: 18px;
 `;
+
+// const mapStateToProps
 
 export default Post;

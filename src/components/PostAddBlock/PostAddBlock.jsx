@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-// import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { addedPost } from '../../actions';
+import SourceService from '../../services/server';
+
 
 import { Row, AvatarBG } from '../Profile/Profile';
 import { photo, video, camera } from '../../services/imagePath';
@@ -10,25 +14,92 @@ const panelStyle = { maxWidth: '172px'};
 
 
 
-export default class PostAddBlock extends Component {
+class PostAddBlock extends Component {
 
-	onAddPost() {
+	constructor(props) {
+		super(props);
+		this.text = React.createRef();
+		this.setZero = this.setZero.bind(this);
+		this.getCurrentDate = this.getCurrentDate.bind(this);
+		this.getCurrentTime = this.getCurrentTime.bind(this);
+		this.onAddPost = this.onAddPost.bind(this);
+	}
 
+	componentDidMount() {
+		this.date = new Date();
+
+		new SourceService().getProfileInfo()
+			.then(res => this.profileInfo = res)
+			.catch(() => this.profileInfo);
+
+	}
+
+	setZero(num) {
+		return num < 10 ? `0${num}` : num;
+	}
+
+	getCurrentDate() {
+		this.day = this.setZero(this.date.getDate());
+		this.month = this.setZero(this.date.getMonth() + 1);
+		this.year = this.setZero(this.date.getFullYear());
+
+		return `${this.day}.${this.month}.${this.year}`
+	}
+
+	getCurrentTime() {
+		this.hours = this.setZero(this.date.getHours());
+		this.minutes = this.setZero(this.date.getMinutes());
+		this.seconds = this.setZero(this.date.getSeconds());
+
+
+		return `${this.hours}:${this.minutes}:${this.seconds}`;
+	}
+
+	onAddPost(e) {
+		e.preventDefault();
+		const { posts, addedPost } = this.props;
+		const { avatar, fullname } = this.profileInfo;
+
+
+		this.post = {
+			id: `${+posts[posts.length - 1]['id'] + 1}`,
+			avatar: `${avatar ? avatar : null}`,
+			fullname: `${fullname ? fullname : null}`,
+			date: this.getCurrentDate(),
+			time: this.getCurrentTime(),
+			preview: '',
+			description: this.text.current.value,
+			likes: 0,
+			comments: 0
+		};
+
+		addedPost(this.post);
+		this.text.current.value = '';
+
+		if (posts) {
+			localStorage.removeItem('posts');
+			localStorage.setItem('posts', JSON.stringify(posts));
+		}
 	}
 
 
 	render() {
+		const { avatar } = this.props;
+
 		return (
 			<Block>
 				<RowBlock>
 					<AvatarBG>
-						<img src="" alt="avatar" />
+						{
+							avatar ? <img src={avatar} alt="avatar" /> : null
+						}
 					</AvatarBG>
 					<PostForm onSubmit={this.onAddPost}>
 						<Container>
 							<TextField 
 								type="text" 
 								placeholder="write something" 
+								ref={this.text}
 							/>
 							<Panel style={panelStyle}>
 								<IconLinksContainer>
@@ -53,7 +124,8 @@ export default class PostAddBlock extends Component {
 }
 
 const Block = styled.div`
-	min-width: 550px;
+	max-width: 550px;
+	margin: 0 auto;
    position: relative;
 	padding: 38px 30px; 
 	background-color: #fff;
@@ -107,7 +179,26 @@ const Button = styled.button`
 	padding: 5px 15px;
    background-color: #3dc2ec;
    border: none;
+   outline: none;
    color: #fff;
+
+   &:focus {
+   	border: 1px solid #aeaeae;
+   }
 `;
 
 export { Block };
+
+const mapStateToProps = ({ post }) => {
+	const { posts } = post;
+
+	return {
+		posts
+	}
+};
+
+const mapDispatchToProps = { 
+	addedPost 
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostAddBlock);

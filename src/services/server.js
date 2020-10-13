@@ -14,4 +14,8 @@ export default class SourceService {
 	async getPosts () {
 		return await this.getResource('posts');
 	}
+
+	async getProfileInfo() {
+		return await this.getResource('profileInfo');
+	}
 }

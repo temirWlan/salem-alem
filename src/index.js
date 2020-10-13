@@ -7,9 +7,7 @@ import store from './store';
 import 'normalize.css';
 import './index.css';
 
-// import state from './state';
 import App from './App';
-import { avatar, grayBlock } from './state';
  
 
 ReactDOM.render(

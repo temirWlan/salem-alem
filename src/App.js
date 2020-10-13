@@ -22,10 +22,12 @@ const Content = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-start;
-	padding: 27px 5px;
+	padding: 27px 0;
 	background: #f4f2f3;
 	border: 1px solid rgba(0, 0, 0, 0.2);
 `;
+
+const colStyle = {padding: '0'};
 
 const contentPos = {
 	marginTop: '24px'
@@ -34,6 +36,8 @@ const contentPos = {
 const adStyle = {
 	marginTop: '45px'
 };
+
+const postListStyle = { marginTop: '30px' };
 
 
 function App() {
@@ -47,9 +51,9 @@ function App() {
 						<Col lg='3'>
 							<InfoSideBar />
 						</Col>
-						<Col lg='6'>
+						<Col lg='6' style={colStyle}>
 							<PostAddBlock />
-							<PostList style={{marginTop: '30px'}} />
+							<PostList/>
 						</Col>
 						<Col lg='3'>
 							<ProfileSidebar />

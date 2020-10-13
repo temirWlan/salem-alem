@@ -36,11 +36,12 @@ const Title = styled.h3`
 	text-transform: uppercase;
 	line-height: 21px;
 	position: relative;
+	display: inline-block;
 
 	&:after {
 		content: '';
 		display: inline-block;
-		width: 52px;
+		width: 100%;
 		height: 3px;
 		background-color: #1d94d8;
 		position: absolute;

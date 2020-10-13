@@ -27,7 +27,9 @@ const Profile = ({ avatar, msgCount, notifCount }) => {
 		<>
 			<Row>
 				<AvatarBG>
-					<img src={avatar} alt="avatar" />
+					{
+						avatar ? <img src={avatar} alt="avatar" /> : null
+					}
 				</AvatarBG>
 				<Column>
 					<Row style={rowStyle}>
@@ -81,9 +83,9 @@ const Column = styled.div`
 `;
 
 const AvatarBG = styled.div`
-	max-width: 50px;
-	max-height: 50px;
-	border: 50%;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
 	background-color: #c4c4c4;
 `;
 
