@@ -1,0 +1,23 @@
+.icon {
+   fill: transparent;
+   stroke: var(--pink);
+   stroke-width: 20;
+   cursor: pointer;
+   position: relative;
+} 
+.icon svg {
+   max-width: 18px;
+   max-height: 18px;
+   overflow: visible;
+   fill: #fff;
+}
+
+.active svg{
+   fill: #f00;
+}
+ 
+.icon path {
+   stroke-dashoffset: 0;
+   stroke-dasharray: 1550;
+   transform-origin: center;
+}

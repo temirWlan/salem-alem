@@ -1,4 +1,4 @@
-import { POSTS_REQUESTED, POSTS_LOADED, POSTS_REJECTED, ADD_POST } from '../actions';
+import { POSTS_REQUESTED, POSTS_LOADED, POSTS_REJECTED, ADD_POST, POST_LIKED } from '../actions';
 
 const initialState = {
 	posts: [],
@@ -35,11 +35,11 @@ export default function postReducer(state = initialState, action) {
 				loading: false,
 				error: false
 			};
-		// case POST_LIKED:
-		// 	state.posts.forEach(post => {
-		// 		console.dir(post);
-		// 	});
-			
+		case POST_LIKED:
+			state.posts.forEach(post => {
+				console.dir(post);
+			});
+			break;
 		default: 
 			return state;
 	}

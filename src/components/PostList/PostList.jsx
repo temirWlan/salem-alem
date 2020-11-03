@@ -12,10 +12,6 @@ import Error from '../Error/Error';
 
 class PostList extends Component {
 
-	componentDidMount() {
-		uploadPosts();
-	}
-
 	getItems(items) {
 			const posts = items.map(({ avatar, fullname, date, time,  preview, description, id }) => {
 				return <Post 
@@ -44,7 +40,7 @@ class PostList extends Component {
 
 		return (
 			<Container>
-				{/* {loadingBlock} */}
+				{loadingBlock}
 				{errorBlock}
 				{posts}
 			</Container>
@@ -71,11 +67,11 @@ const mapStateToProps = ({ post }) => {
 	}
 };
 
-const mapDispatchToProps = {
+const mapDispatchToProps = dispatch => ({
 	postsRequested, 
 	postsLoaded, 
 	postsRejected,
-	uploadPosts
-};
+	uploadPosts: dispatch(uploadPosts())
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostList);

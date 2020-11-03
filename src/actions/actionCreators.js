@@ -1,5 +1,5 @@
 import SourceService from './../services/server';
-import { POSTS_REQUESTED, POSTS_LOADED, POSTS_REJECTED, ADD_POST } from './types';
+import { POSTS_REQUESTED, POSTS_LOADED, POSTS_REJECTED, ADD_POST, POST_LIKED } from './types';
 
 
 
@@ -15,7 +15,6 @@ const postsLoaded = posts => {
 
 const postsRejected = () => ({ type: POSTS_REJECTED });
 
-
 const addedPost = post => {
 	return {
 		type: ADD_POST,
@@ -23,17 +22,18 @@ const addedPost = post => {
 	};
 };
 
-/* async */
-const uploadPosts = () =>  {
-	return dispatch => {
-		dispatch(postsRequested());
+const onLikedPost = () => ({ type: POST_LIKED });
 
-		new SourceService().getPosts()
-			.then(res => res.json())
-			.then(posts => dispatch(postsLoaded(posts)))
-			.catch(() => dispatch(postsRejected()));
-	};
+/* async */
+const uploadPosts = () => dispatch => {
+	dispatch(postsRequested());
+
+	new SourceService().getPosts()
+		.then(posts => dispatch(postsLoaded(posts)))
+		.catch(() => dispatch(postsRejected()));
 };
+
+
 
 
 

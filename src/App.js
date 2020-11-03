@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Container, Col } from 'reactstrap';
 import styled from 'styled-components';
-import { BrowserRouter as Router} from 'react-router-dom';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
 
 
-import './App.css';
+import { NewsPage, FriendsPage } from './components/pages';
 import Header from './components/Header/Header';
 import InfoSideBar from './components/InfoSide/InfoSide';
 import ProfileSidebar from './components/Profile/Profile';
@@ -12,6 +12,7 @@ import AdSidebar from './components/Ad/Ad';
 import PostAddBlock from './components/PostAddBlock/PostAddBlock';
 import PostList from './components/PostList/PostList';
 
+import './App.css';
 
 const ContainerBlock = styled(Container)` 
 	max-width: 1170px;
@@ -52,8 +53,9 @@ function App() {
 							<InfoSideBar />
 						</Col>
 						<Col lg='6' style={colStyle}>
-							<PostAddBlock />
-							<PostList/>
+							<Route exact path='/' component={NewsPage} />
+							<Route exact path="/friends" component={FriendsPage} /> 
+							<FriendsPage />
 						</Col>
 						<Col lg='3'>
 							<ProfileSidebar />

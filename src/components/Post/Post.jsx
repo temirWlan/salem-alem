@@ -5,10 +5,9 @@ import { Link } from 'react-router-dom';
 
 import { Row, Column, AvatarBG } from '../Profile/Profile';
 import { Block } from '../PostAddBlock/PostAddBlock';
-import { connect } from 'react-redux';
+import Like from '../Like/Like';
+import Comment from '../Comment/Comment';
 
-import regularLike from '../../images/post-status-icons/regular-like.svg';
-import solidLike from '../../images/post-status-icons/solid-like.svg';
 import comment from '../../images/post-status-icons/speech-bubble.svg';
 
 
@@ -23,7 +22,15 @@ const Post = ({ avatar, fullname, date, time, preview, description, id }) => {
 	const onLikedPost = e => {
 		e.preventDefault();
 		updateLikeState({ liked: !likeState.liked })
-		like.current.src = `${likeState.liked ? solidLike : regularLike}`;
+
+		like.current.className += ' active';
+		console.log(like.current.className);
+		
+	};
+
+	const toggleCommentBlock = e => {
+		e.preventDefault();
+		return <Comment />
 	};
 
 	return (
@@ -64,13 +71,12 @@ const Post = ({ avatar, fullname, date, time, preview, description, id }) => {
 					href="#" 
 					onClick={onLikedPost}
 				>
-					<img 
-						src={regularLike} 
-						alt="like"
-						ref={like}
-					/>
+					<Like refName={like} />
 				</PanelItem>
-				<PanelItem href="#">
+				<PanelItem 
+					href="#"
+					onClick={toggleCommentBlock}
+				>
 					<img src={comment} alt="comment" />
 				</PanelItem>
 			</Panel>
@@ -137,6 +143,5 @@ const PanelItem = styled.a`
 	max-height: 18px;
 `;
 
-// const mapStateToProps
 
 export default Post;

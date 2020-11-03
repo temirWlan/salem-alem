@@ -10,19 +10,19 @@ import 'bootstrap/dist/css/bootstrap.css';
 const NavbarBlock = () => {
 
 	const navItems = [
-		{label: 'Home', id: Math.random()}, 
-		{label: 'Timeline', id: Math.random()}, 
-		{label: 'Account Settings', id: Math.random()}, 
-		{label: 'More Pages', id: Math.random()}
+		{label: 'Home', path: '/',id: Math.random()}, 
+		{label: 'Timeline', path: '/timeline',id: Math.random()}, 
+		{label: 'Account Settings', path: '/account-settings',id: Math.random()}, 
+		{label: 'More Pages', path: '/more-pages', id: Math.random()}
 	];
 
-	const items = navItems.map(({ label, id }) => {
+	const items = navItems.map(({ label, path, id }) => {
 		return (
 			<NavItem key={id} >
 				<NavLink 
 						style={{color: '#000', marginLeft: '40px'}} 
 						activeStyle={{fontWeight: 700, textDecoration: 'none'}}
-						to={`/${label.replace(' ', '')}`} 
+						to={path} 
 						key={id}
 			>{label}</NavLink>
 			</NavItem>

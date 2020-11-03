@@ -8,24 +8,24 @@ import withSidebar from '../HOC/withSidebar';
 const InfoSide = () => {
 
 	const itemList = [
-			{label: 'News Feed', id: (Math.random() ** 2)},
-			{label: 'Inbox', id: (Math.random() ** 2)},
-			{label: 'My Pages', id: (Math.random() ** 2)},
-			{label: 'Friends', id: (Math.random() ** 2)},
-			{label: 'Images', id: (Math.random() ** 2)},
-			{label: 'Videos', id: (Math.random() ** 2)},
-			{label: 'Messages', id: (Math.random() ** 2)},
-			{label: 'Notifications', id: (Math.random() ** 2)},
-			{label: 'People Nearby', id: (Math.random() ** 2)},
-			{label: 'Insights', id: (Math.random() ** 2)},
-			{label: 'Log out', id: (Math.random() ** 2)}
+			{label: 'News Feed', path: '/', id: (Math.random() ** 2)},
+			{label: 'Inbox', path: '/inbox', id: (Math.random() ** 2)},
+			{label: 'My Pages', path: '/my-pages', id: (Math.random() ** 2)},
+			{label: 'Friends', path: '/friends', id: (Math.random() ** 2)},
+			{label: 'Images', path: '/images', id: (Math.random() ** 2)},
+			{label: 'Videos', path: '/videos', id: (Math.random() ** 2)},
+			{label: 'Messages', path: '/messages', id: (Math.random() ** 2)},
+			{label: 'Notifications', path: '/notifications', id: (Math.random() ** 2)},
+			{label: 'People Nearby', path: '/people-nearby', id: (Math.random() ** 2)},
+			{label: 'Insights', path: '/insights', id: (Math.random() ** 2)},
+			{label: 'Log out', path: '/log-out', id: (Math.random() ** 2)}
 	];
 	
-	const linkList = itemList.map(({ label, id }) => {
+	const linkList = itemList.map(({ label, path, id }) => {
 		return ( 
 			<ListItem key={id}>
 				<ListItemLink 
-						to={`/${label.replace(' ', '-').toLowerCase()}`}
+						to={path}
 				>
 					{label}
 				</ListItemLink>

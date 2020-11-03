@@ -62,7 +62,7 @@ class PostAddBlock extends Component {
 
 
 		this.post = {
-			id: `${+posts[posts.length - 1]['id'] + 1}`,
+			id: `${Math.random()}`,
 			avatar: `${avatar ? avatar : null}`,
 			fullname: `${fullname ? fullname : null}`,
 			date: this.getCurrentDate(),
@@ -75,11 +75,6 @@ class PostAddBlock extends Component {
 
 		addedPost(this.post);
 		this.text.current.value = '';
-
-		if (posts) {
-			localStorage.removeItem('posts');
-			localStorage.setItem('posts', JSON.stringify(posts));
-		}
 	}
 
 
