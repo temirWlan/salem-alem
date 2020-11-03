@@ -55,7 +55,6 @@ function App() {
 						<Col lg='6' style={colStyle}>
 							<Route exact path='/' component={NewsPage} />
 							<Route exact path="/friends" component={FriendsPage} /> 
-							<FriendsPage />
 						</Col>
 						<Col lg='3'>
 							<ProfileSidebar />

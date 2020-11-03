@@ -71,7 +71,7 @@ const mapDispatchToProps = dispatch => ({
 	postsRequested, 
 	postsLoaded, 
 	postsRejected,
-	uploadPosts: dispatch(uploadPosts())
+	uploadPosts: dispatch(uploadPosts)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostList);

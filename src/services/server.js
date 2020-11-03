@@ -1,5 +1,6 @@
 export default class SourceService {
 	_apiBase = 'http://localhost:4000';
+	friendsApi = 'https://social-network.samuraijs.com/api/1.0/users';
 
 	async getResource (url) {
 		const res = await fetch(`${this._apiBase}/${url}`);
@@ -17,5 +18,9 @@ export default class SourceService {
 
 	async getProfileInfo() {
 		return await this.getResource('profileInfo');
+	}
+
+	async getFriends () {
+		return await this.getResource(this.friendsApi);
 	}
 }
