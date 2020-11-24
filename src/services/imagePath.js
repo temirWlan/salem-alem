@@ -1,20 +1,20 @@
 /* navigation icons */
-import search from '../images/nav-icons//search.svg';
-import home from '../images/nav-icons/home.svg';
-import bell from '../images/nav-icons/bell.svg';
-import chat from '../images/nav-icons/chat.svg';
-import world from '../images/nav-icons/world.svg';
+import search from '../assets/images/nav-icons//search.svg';
+import home from '../assets/images/nav-icons/home.svg';
+import bell from '../assets/images/nav-icons/bell.svg';
+import chat from '../assets/images/nav-icons/chat.svg';
+import world from '../assets/images/nav-icons/world.svg';
 
 /* profile images */
-import avatar from '../images/profile-icons/avatar.jpg';
+import avatar from '../assets/images/profile-icons/avatar.jpg';
 
 /* post panel icons */
-import photo from '../images/post-panel-icons/photo.svg';
-import video from '../images/post-panel-icons/video-camera.svg';
-import camera from '../images/post-panel-icons/camera.svg';
+import photo from '../assets/images/post-panel-icons/photo.svg';
+import video from '../assets/images/post-panel-icons/video-camera.svg';
+import camera from '../assets/images/post-panel-icons/camera.svg';
 
 /* added post previews */
-import grayBlock from '../images/post-images/gray-preview.jpg';
+import grayBlock from '../assets/images/post-images/gray-preview.jpg';
 
 
 export  {

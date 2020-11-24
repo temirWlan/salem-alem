@@ -2,12 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
-import store from './store';
+import store from './state/store';
+import App from './components/App/App';
 
 import 'normalize.css';
 import './index.css';
-
-import App from './App';
  
 
 ReactDOM.render(

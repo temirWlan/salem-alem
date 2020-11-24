@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Navbar, NavItem, ListGroup } from 'reactstrap';
+import React from 'react';
+import { Navbar, NavItem } from 'reactstrap';
 import { NavLink  } from 'react-router-dom';
-import styled from 'styled-components';
 
 import 'bootstrap/dist/css/bootstrap.css';
+import { NavList } from './style';
 
 
 
@@ -46,19 +46,5 @@ const List = ({ items }) => {
 		</NavList>
 	)
 }
-
-const NavList = styled(ListGroup)`
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-	list-style-type: none;
-
-	font-family: 'Roboto', sans-serif;
-	font-size: 16px;
-	font-weight: 500;
-	line-height: 18px;
-	color: #000;
-`;
 
 export default NavbarBlock;

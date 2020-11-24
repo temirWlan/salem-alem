@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import React from 'react';
 
-import withSidebar from '../HOC/withSidebar';
+import { withSidebar } from '../../hoc';
 
+import { List, ListItem, ListItemLink } from './style';
 
 const InfoSide = () => {
 
@@ -35,28 +34,6 @@ const InfoSide = () => {
 
 	return <List>{linkList}</List>;
 };
-
-
-const List = styled.ul` 
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	list-style-type: none;
-	margin-left: 29px;
-	padding: 0;
-`;
-
-const ListItem = styled.li` 
-	margin-top: 20px;
-`;
-
-const ListItemLink = styled(Link)` 
-	font-family: 'Roboto',
-	font-size: 18px;
-	font-weight: 500;
-	line-height: 21px;
-	color: #736464;
-`;
 
 
 const InfoSideBar = (props) => withSidebar('shortcuts', props)(InfoSide);

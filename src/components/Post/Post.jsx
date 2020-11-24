@@ -1,21 +1,26 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-import { Row, Column, AvatarBG } from '../Profile/Profile';
-import { Block } from '../PostAddBlock/PostAddBlock';
-import Like from '../Like/Like';
-import Comment from '../Comment/Comment';
+import { AvatarBG } from '../../shared/Blocks';
+import { Row } from '../Profile/style';
+import Like from '../Like';
+import Comment from '../Comment';
 
-import comment from '../../images/post-status-icons/speech-bubble.svg';
+import { PostBlock, Title, PostDateDescription, PreviewBG, Text, Panel, PanelItem } from './style';
+import comment from '../../assets/images/post-status-icons/speech-bubble.svg';
 
 
 
-const Post = ({ avatar, fullname, date, time, preview, description, id }) => {
+const Post = ({ avatar, fullname, date, time, preview, description }) => {
 	const [likeState, updateLikeState] = useState({
 		liked: false
 	});
+
+	useEffect(() => {
+		
+	}, []);
 
 	const like = React.createRef();
 
@@ -24,8 +29,6 @@ const Post = ({ avatar, fullname, date, time, preview, description, id }) => {
 		updateLikeState({ liked: !likeState.liked })
 
 		like.current.className += ' active';
-		console.log(like.current.className);
-		
 	};
 
 	const toggleCommentBlock = e => {
@@ -91,57 +94,13 @@ const Post = ({ avatar, fullname, date, time, preview, description, id }) => {
 	);
 }
 
-
-const PostBlock = styled(Block)`
-	max-width: 550px;
-	width: 100%;
-	margin: 0 auto;
-	padding: 27px 25px 19px 25px;
-
-	&:not(:first-child) {
-		margin-top: 40px;
-	}
-`;
-
-const Title = styled.h3`
-	font-family: 'Roboto', sans-serif;
-	font-weight: 500;
-	font-size: 16px;
-	line-height: 20px;
-	color: #000;
-	margin-bottom: 0;
-`;
-
-const PostDateDescription = styled.span`
-	font-family: 'Roboto', sans-serif;
-	font-weight: 500;
-	font-size: 12px;
-	line-height: 14px;
-	color: #847777;
-`; 
-
-const PreviewBG = styled.div`
-	max-width: 500px;
-	max-height: 300px;
-`;
-
-const Text = styled.p`
-	font-family: 'Roboto';
-	font-weight: 500;
-	font-size: 14px;
-	line-height: 150%;
-	color: #000;
-`;
-
-const Panel = styled(Row)`
-	max-width: 55px;
-	margin-top: 13px;
-`;
-
-const PanelItem = styled.a`
-	max-width: 18px;
-	max-height: 18px;
-`;
-
+Post.propTypes = {
+	avatar: PropTypes.string, 
+	fullname: PropTypes.string, 
+	date: PropTypes.string, 
+	time: PropTypes.string, 
+	preview: PropTypes.string, 
+	description: PropTypes.string, 
+}
 
 export default Post;

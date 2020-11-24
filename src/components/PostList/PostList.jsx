@@ -1,32 +1,36 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import { postsRequested, postsLoaded, postsRejected, uploadPosts } from '../../actions';
-// import SourceService from './../../services/server';
+import { uploadPosts } from '../../state/actions';
 
-import Post from '../Post/Post';
-import Spinner from '../Spinner/Spinner';
-import Error from '../Error/Error';
+import { Container } from './style';
+import Post from '../Post';
+import Spinner from '../Spinner';
+import Error from '../Error';
 
 
 class PostList extends Component {
 
-	getItems(items) {
-			const posts = items.map(({ avatar, fullname, date, time,  preview, description, id }) => {
-				return <Post 
-					avatar={avatar}
-					fullname={fullname}
-					date={date}
-					time={time}
-					preview={preview}
-					description={description}
-					id={id}
-					key={id}
-				/>
-			});
+	componentDidMount() {
+		this.props.uploadPosts();
+	}
 
-			return posts;
+	getItems(items) {
+		const posts = items.map(({ avatar, fullname, date, time,  preview, description, id }) => {
+			return <Post 
+				avatar={avatar}
+				fullname={fullname}
+				date={date}
+				time={time}
+				preview={preview}
+				description={description}
+				id={id}
+				key={id}
+			/>
+		});
+
+		return posts;
 	}
 
 	render() {
@@ -48,30 +52,13 @@ class PostList extends Component {
 	}
 }
 
+PostList.propTypes = {
+	posts: PropTypes.bool, 
+	loading: PropTypes.bool.isRequired, 
+	error: PropTypes.bool.isRequired
+}
 
-const Container = styled.div`
-	margin-top: 30px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-`;
-
-
-const mapStateToProps = ({ post }) => {
-	const { posts, loading, error } = post;
-
-	return {
-		postList: posts,
-		loading,
-		error
-	}
-};
-
-const mapDispatchToProps = dispatch => ({
-	postsRequested, 
-	postsLoaded, 
-	postsRejected,
-	uploadPosts: dispatch(uploadPosts)
-});
+const mapStateToProps = ({ post: { posts, loading, error } }) => ({ postList: posts, loading, error });
+const mapDispatchToProps = dispatch => ({ uploadPosts });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostList);
